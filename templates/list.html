@@ -1,0 +1,16 @@
+<!doctype html>
+<title>Wypisywanie nazw plikow</title>
+{% if dict_of_files|length > 0 %}
+  <h1>Pliki na serwerze</h1>
+      <p><a href="/upload"> Upload</a></p>
+  <ol>
+  {% for key,item in dict_of_files.items() %}
+    <li><a href="/pliki/{{key}}" Nazwa pliku: <b>{{key}}</b></a></li>
+    Lokalizacja pliku: <b>{{item}}</b>
+    <td><a href="/delete_data/{{key}}">usuń</a></td>
+  {% endfor %}
+  </ol>
+{% else %}
+  <h1>Brak plikow!</h1>
+  <p><a href="/upload"> Upload</a></p>
+{% endif %}

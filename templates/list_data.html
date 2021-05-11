@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<title>Wypisywanie wynikow</title>
+<p><a href="/upload"> Upload</a>
+<a href="/pliki"> Pliki</a></p>
+<h1>Dane z tabeli: "metadane"</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nazwa pliku</th>
+            <th>Rozmiar pliku</th>
+            <th>Ilosc kolumn</th>
+            <th>Ilosc wierszy</th>
+            <th>Ilosc rekordow</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for i in slownik_query["metadane"] %}
+            <tr>
+                <th>{{i.file_name}}</th>
+                <td>{{i.file_size}}</td>
+                <td>{{i.columns}}</td>
+                <td>{{i.rows}}</td>
+                <td>{{i.records_nmbr}}</td>
+            </tr>
+            {% endfor %}
+
+    </tbody>
+
+</table>
+
+<h1>Dane z tabeli: "data_db_object"</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nazwa pliku</th>
+            <th>Nazwa kolumny</th>
+            <th>Typ danych</th>
+            <th>Ilosc wartosci unikalnych</th>
+            <th>Ilosc wartosci pustych</th>
+            <th>Ilosc wartosci "NaN"</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for i in slownik_query["data_db_object"] %}
+            <tr>
+                <th>{{i.file_name}}</th>
+                <td>{{i.column_name}}</td>
+                <td>{{i.dtype}}</td>
+                <td>{{i.unique_values}}</td>
+                <td>{{i.empty_values}}</td>
+                <td>{{i.nan_values}}</td>
+            </tr>
+            {% endfor %}
+
+    </tbody>
+</table>
+
+<h1>Dane z tabeli: "data_db_numeric"</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nazwa pliku</th>
+            <th>Nazwa kolumny</th>
+            <th>Typ danych</th>
+            <th>Wartosc minimalna</th>
+            <th>Srednia</th>
+            <th>Wartosc maksymalna</th>
+            <th>Mediana</th>
+            <th>Odch. std.</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for i in slownik_query["data_db_numeric"] %}
+            <tr>
+                <th>{{i.file_name}}</th>
+                <td>{{i.column_name}}</td>
+                <td>{{i.dtype}}</td>
+                <td>{{i.min_value}}</td>
+                <td>{{i.mean_value}}</td>
+                <td>{{i.max_value}}</td>
+                <td>{{i.median_value}}</td>
+                <td>{{i.std_dev_value}}</td>
+            </tr>
+            {% endfor %}
+
+    </tbody>
+</table>
+
+<h1>Dane z tabeli: "data_db_datetime"</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nazwa pliku</th>
+            <th>Nazwa kolumny</th>
+            <th>Typ danych</th>
+            <th>Pierwsza data</th>
+            <th>Ostatnia data</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for i in slownik_query["data_db_datetime"] %}
+            <tr>
+                <th>{{i.file_name}}</th>
+                <td>{{i.column_name}}</td>
+                <td>{{i.dtype}}</td>
+                <td>{{i.min_date}}</td>
+                <td>{{i.max_date}}</td>
+                
+            </tr>
+            {% endfor %}
+
+    </tbody>
+</table>
