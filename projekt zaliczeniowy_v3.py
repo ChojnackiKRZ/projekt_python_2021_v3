@@ -2,7 +2,7 @@
 """
 Created on Tue Apr 27 22:09:37 2021
 
-@author: krzys
+@author: krzysztof
 """
 
 
