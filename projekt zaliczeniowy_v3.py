@@ -12,7 +12,7 @@ import os
 import pandas as pd
 from pathlib import Path
 from hurry.filesize import size
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float, DateTime
 from typing import List
 from pydantic import BaseModel
 import matplotlib.pyplot as plt
@@ -36,7 +36,7 @@ class metadane(db.Model):
     file_size = Column (String(120), nullable = True)    
     columns = Column (Integer, nullable = True)
     rows = Column (Integer, nullable = True)
-    records_nmbr = Column (String(80), nullable = True)
+    records_nmbr = Column (Integer, nullable = True)
     def __repr__(self):
         return f'<Nazwa_pliku: {self.file_name},\
             Rozmiar_pliku: {self.numery},\
@@ -67,11 +67,11 @@ class data_db_numeric(db.Model):
     file_name = Column (String (80), nullable = True)
     column_name = Column (String (80),nullable = True)
     dtype = Column (String (10),nullable = True)
-    min_value = Column (String(10), nullable = True)
-    mean_value = Column (String(10), nullable = True)
-    max_value = Column (String(10), nullable = True)
-    median_value = Column (String(10), nullable = True)
-    std_dev_value = Column (String(10), nullable = True)
+    min_value = Column (Float, nullable = True)
+    mean_value = Column (Float, nullable = True)
+    max_value = Column (Float, nullable = True)
+    median_value = Column (Float, nullable = True)
+    std_dev_value = Column (Float, nullable = True)
     def __repr__(self):
         return f'<Nazwa_pliku: {self.file_name},\
             Typ_danych: {self.dtype},\
@@ -88,8 +88,8 @@ class data_db_datetime(db.Model):
     file_name = Column (String (80), nullable = True)
     column_name = Column (String (80),nullable = True)
     dtype = Column (String (10),nullable = True)
-    min_date = Column (String(20), nullable = True)
-    max_date = Column (String(20), nullable = True)
+    min_date = Column (DateTime, nullable = True)
+    max_date = Column (DateTime, nullable = True)
     def __repr__(self):
         return f'<Nazwa_pliku: {self.file_name},\
             Typ_danych: {self.dtype},\
@@ -202,8 +202,8 @@ def upload_file():
                     statystyki = data_db_datetime(file_name = '{}'.format(filename),\
                                          column_name = kolumna,\
                                          dtype = str(typy_wszystkie[kolumna]),\
-                                         min_date = str(min_date),\
-                                         max_date = str(max_date))
+                                         min_date = min_date,\
+                                         max_date = max_date)
                     db.session.add(statystyki)
                     db.session.commit()
                 for kolumna in dataset.select_dtypes(include = ['float64', 'int64']):
