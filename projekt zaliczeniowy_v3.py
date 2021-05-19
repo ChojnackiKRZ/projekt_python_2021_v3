@@ -28,6 +28,11 @@ wd = r"C:\Users\krzys\Desktop\data science\II semestr\python\projekt zaliczeniow
 app.config['SQLALCHEMY_DATABASE_URI'] = r"sqlite:///C:\Users\krzys\Desktop\data science\II semestr\python\projekt zaliczeniowy\baza_windows.db"
 db = SQLAlchemy(app)
 
+foldery_do_utworzenia = ['histogramy', 'wrzucone_pliki']
+
+for i in foldery_do_utworzenia:
+    if not os.path.exists(i):
+        os.makedirs(i)
 
 class metadane(db.Model):
     __tablename__ = 'metadane'
